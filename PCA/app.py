@@ -4,7 +4,10 @@ import numpy as np
 import pandas as pd
 app = Flask(__name__)
 
-model = pickle.load(open(r"D:\Python-Course\ML-Course\test\Machine-Learning-Algorithm\PCA\wine_pca_model.pkl", "rb"))
+pipeline = pickle.load(open(
+    r"D:\Python-Course\ML-Course\test\Machine-Learning-Algorithm\PCA\wine_pca_pipeline.pkl",
+    "rb"
+))
 
 # Home route
 @app.route("/", methods=["GET"])
@@ -44,7 +47,7 @@ def predict():
 
         input_df = pd.DataFrame(values, columns=columns)
 
-        prediction = model.predict(input_df)[0]
+        prediction = pipeline.predict(input_df)[0]
 
         return render_template(
             "index.html",
